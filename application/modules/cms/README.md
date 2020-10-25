@@ -2,7 +2,7 @@
 
 A simple content management system for CodeIgniter 3.
 
-### Installation
+## Installation
 
 Download the .zip file and extract it to your CodeIgniter 3 installation directory.
 
