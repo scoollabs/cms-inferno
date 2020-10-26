@@ -9,7 +9,7 @@
   <?php foreach ($posts as $post): ?>
     <tr>
       <td><?php echo date('M j', strtotime($post->date)); ?></td>
-      <td><?php echo anchor('post/' . $post->id, $post->title); ?></td>
+      <td><?php echo anchor('post/' . $post->id, $post->title, 'target="_blank"'); ?></td>
       <td>
         <?php echo anchor('posts/edit/' . $post->id, 'Edit'); ?>
         <a href='javascript:void(0);' onclick="deletePost('<?php echo $post->id; ?>', <?php echo $post->id; ?>);" title="Delete">Delete</a>

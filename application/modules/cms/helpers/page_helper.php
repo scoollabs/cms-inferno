@@ -19,18 +19,3 @@ function get_pages() {
   $obj = &get_instance();
   return $obj->page_model->find_all();
 }
-
-function section($page) {
-  $obj = &get_instance();
-  $obj->load->view('themes/' . config_item('cms_theme') . '/' . $page);
-}
-
-function load_view($view, $data, $layout = 'layout', $theme = '') {
-  $obj = &get_instance();
-  $data['content'] = $obj->load->view($theme . '/' . $view, $data, TRUE);
-  $obj->load->view($theme . '/' . $layout, $data);
-}
-
-function get_cms_theme() {
-  return 'themes/' . config_item('cms_theme');
-}

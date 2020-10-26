@@ -1,11 +1,11 @@
 <h3>Add post</h3>
 <?php echo form_open('posts/add'); ?>
 <p>Title<br>
-  <?php echo form_input('title', $this->input->post('title')); ?>
+  <?php echo form_input('title', $this->input->post('title'), 'class="form-control"'); ?>
   <?php echo form_error('title'); ?>
 </p>
 <p>Teaser<br>
-  <?php echo form_input('teaser', $this->input->post('teaser')); ?>
+  <?php echo form_input('teaser', $this->input->post('teaser'), 'class="form-control"'); ?>
   <?php echo form_error('teaser'); ?>
 </p>
 <p>Content<br>
@@ -13,7 +13,7 @@
   <?php echo form_error('content'); ?>
 </p>
 <p>
-  <?php echo form_submit('submit', 'Save changes'); ?>
+  <?php echo form_submit('submit', 'Save Changes', 'class="btn btn-secondary'); ?>
   or <?php echo anchor('posts', 'cancel'); ?>
 </p>
 <?php echo form_close(); ?>

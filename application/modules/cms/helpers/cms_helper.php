@@ -14,6 +14,12 @@ function redirect_if($condition, $url) {
   }
 }
 
+function print_pre($text) {
+  echo '<pre>';
+  print_r($text);
+  echo '</pre>';
+}
+
 function theme_path() {
   $obj = &get_instance();
   return trimmed_base_url() . '/application/views/' . $obj->layout->get_theme();
@@ -40,4 +46,27 @@ function get_theme() {
   $obj = &get_instance();
   $obj->load->library('layout');
   return $obj->layout->get_theme();
+}
+
+function section($page) {
+  $obj = &get_instance();
+  $obj->load->view('themes/' . config_item('cms_theme') . '/' . $page);
+}
+
+function load_view($view, $data = null) {
+  $obj = &get_instance();
+  $theme = config_item('theme');
+  $theme = $theme ? $theme : 'simple';
+  $data['content'] = $obj->load->view('themes/' . $theme . '/' . $view, $data, TRUE);
+  $obj->load->view('themes/' . $theme . '/layout', $data);
+}
+
+function load_admin_view($view, $data = null) {
+  $obj = &get_instance();
+  $data['content'] = $obj->load->view($view, $data, TRUE);
+  $obj->load->view('admin_layout', $data);
+}
+
+function get_cms_theme() {
+  return 'themes/' . config_item('cms_theme');
 }

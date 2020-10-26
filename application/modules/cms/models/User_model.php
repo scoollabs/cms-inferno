@@ -16,4 +16,8 @@ class User_model extends CI_Model {
     return null;
   }
 
+  function save($user) {
+    $this->db->insert('users', $user);
+  }
+
 }

@@ -8,17 +8,20 @@ class Cms extends MY_Controller {
     $this->load->model('post_model');
     $this->load->model('post_comment_model');
     $this->load->model('page_model');
+    $this->load->model('link_model');
   }
 
   function install() {
+
   }
 
   function settings() {
-    
+
   }
 
   function home() {
-    load_view('home', null, 'layout', get_cms_theme());
+    // load_view('home', null, 'layout', get_cms_theme());
+    load_view('home');
   }
 
   function blog() {
@@ -55,8 +58,8 @@ class Cms extends MY_Controller {
       list($username, $password) = login_form();
       $user = $this->user_model->read_by_username_and_password($username, $password);
       if ($user) {
-        $this->session->set_userdata('user_id', $user->id);
-        $this->session->set_userdata('username', $user->username);
+        session('user_id', $user->id);
+        session('username', $user->username);
         redirect('posts');
       } else {
         $data['message'] = 'Invalid username or password. Please try again!';
@@ -72,19 +75,20 @@ class Cms extends MY_Controller {
 
   function posts() {
     $data['posts'] = $this->post_model->find_all();
-    load_view('posts/index', $data, 'admin_layout', '');
+    load_admin_view('posts/index', $data);
   }
 
   function add_post() {
     if ($this->input->post()) {
       $post = post_form($this->session->userdata('user_id'));
+      print_pre($post);
       post_form_validate();
       if ($this->form_validation->run() != FALSE) {
         $this->post_model->save($post);
         redirect('posts');
       }
     }
-    load_view('posts/add', null, 'admin_layout');
+    load_admin_view('posts/add', null);
   }
 
   function edit_post($post_id) {
@@ -97,7 +101,7 @@ class Cms extends MY_Controller {
       }
     }
     $data['post'] = $this->post_model->read($post_id);
-    load_view('posts/edit', $data, 'admin_layout', '');
+    load_admin_view('posts/edit', $data);
   }
 
   function delete_post($post_id) {
@@ -107,7 +111,7 @@ class Cms extends MY_Controller {
 
   function pages() {
     $data['pages'] = $this->page_model->find_all();
-    load_view('pages/index', $data, 'admin_layout');
+    load_admin_view('pages/index', $data);
   }
 
   function add_page() {
@@ -119,7 +123,7 @@ class Cms extends MY_Controller {
         redirect('pages');
       }
     }
-    load_view('pages/add', null, 'admin_layout', '');
+    load_admin_view('pages/add');
   }
 
   function edit_page($page_id) {
@@ -132,11 +136,53 @@ class Cms extends MY_Controller {
       }
     }
     $data['page'] = $this->page_model->read($page_id);
-    load_view('pages/edit', $data, 'admin_layout');
+    load_admin_view('pages/edit', $data);
   }
 
   function delete_page($page_id) {
     $this->page_model->delete($page_id);
     redirect('pages');
+  }
+
+  function links() {
+    $data['links'] = $this->link_model->find_all();
+    load_admin_view('links/index', $data);
+  }
+
+  function add_link() {
+    if ($this->input->post()) {
+      $link = link_form();
+      link_form_validate();
+      if ($this->form_validation->run() != FALSE) {
+        $this->link_model->save($link);
+        redirect('links');
+      }
+    }
+    $data['pages'] = $this->page_model->find_all_for_dropdown();
+    load_admin_view('links/add', $data);
+  }
+
+  function edit_link($link_id) {
+    if ($this->input->post()) {
+      $link = link_form();
+      link_form_validate();
+      if ($this->form_validation->run() != FALSE) {
+        $this->link_model->update($link, $link_id);
+        redirect('links');
+      }
+    }
+    $data['link'] = $this->link_model->read($link_id);
+    $data['pages'] = $this->page_model->find_all_for_dropdown();
+    load_admin_view('links/edit', $data);
+  }
+
+  function delete_link($link_id) {
+    $this->link_model->delete($link_id);
+    redirect('links');
+  }
+
+  function init() {
+    $user = array('username' => 'a', 'password' => password_hash('a', PASSWORD_DEFAULT));
+    $this->user_model->save($user);
   }
 }

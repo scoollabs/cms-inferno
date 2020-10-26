@@ -2,9 +2,21 @@
   footer {
     margin: 100px 0 50px;
   }
+
+  nav a {
+    margin-right: 10px;
+  }
 </style>
 
-<?php echo anchor('.', 'Home'); ?>
+<h1>CMS Inferno</h1>
+
+<nav>
+  <?php echo anchor('.', 'Home'); ?>
+  <?php echo anchor('blog', 'Blog'); ?>
+  <?php foreach (get_links() as $link): ?>
+    <?php echo anchor($link->url, $link->name); ?>
+  <?php endforeach; ?>
+</nav>
 
 <?php foreach (array() as $nav) : ?>
 <?php endforeach; ?>
@@ -13,31 +25,9 @@
 
 <footer>
   <hr>
+  &copy; <?php echo date('Y'); ?>. All rights reserved.
 
-  <h3>Useful</h3>
-  <ul>
-    <li>Web Design</li>
-    <li>Development</li>
-    <li>Wordpress</li>
-    <li>Online Marketing</li>
-    <li>SEO Marketing</li>
-  </ul>
-
-  <h3>About Us</h3>
-  <ul>
-    <li>Support Center</li>
-    <li>Customer Support</li>
-    <li>About Us</li>
-    <li>Copyright</li>
-    <li>Popular Campaign</li>
-  </ul>
-
-  <h3>Information</h3>
   <p>
-    301 The Greenhouse London,<br>
-    E2 8DY UK<br>
-    support@domain.com<br>
-    820-885-3321<br>
+    <?php echo anchor('cms/login', 'Login'); ?>
   </p>
-
 </footer>
