@@ -6,7 +6,7 @@ This is a simple content management software for CodeIgniter 3.
 
 This section should be added to application/config/routes.php file.
 
-```
+```php
 /*
  * CMS Inferno
  */
