@@ -2,6 +2,8 @@
 
 ## Routes
 
+This section should be added to application/config/routes.php file.
+
 ```
 /*
  * CMS Inferno
