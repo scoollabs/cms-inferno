@@ -13,8 +13,12 @@
 <nav>
   <?php echo anchor('.', 'Home'); ?>
   <?php echo anchor('blog', 'Blog'); ?>
-  <?php foreach (get_links() as $link): ?>
-    <?php echo anchor($link->url, $link->name); ?>
+  <?php foreach (get_links() as $link) : ?>
+    <?php if (is_link_external($link)): ?>
+      <?php echo anchor($link->url, $link->name); ?>
+    <?php else: ?>
+      <?php echo anchor('page/' . $link->page_id, $link->name); ?>
+    <?php endif; ?>
   <?php endforeach; ?>
 </nav>
 
