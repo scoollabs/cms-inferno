@@ -1,15 +1,15 @@
 <h3>Add link</h3>
 <?php echo form_open('links/add'); ?>
 <p>Title<br>
-  <?php echo form_input('name', $this->input->post('name'), 'class="form-control form-control-sm"'); ?>
+  <?php echo form_input('name', $this->input->post('name'), 'class="form-control"'); ?>
   <?php echo form_error('name'); ?>
 </p>
 <p id="pages">Pages<br>
-  <?php echo form_dropdown('page_id', $pages, $this->input->post('page_id'), 'class="form-control form-control-sm"'); ?>
+  <?php echo form_dropdown('page_id', $pages, $this->input->post('page_id'), 'class="form-control"'); ?>
   <?php echo form_error('page_id'); ?>
 </p>
 <p id="external-url" class="hidden">URL<br>
-  <?php echo form_input('url', $this->input->post('url'), 'class="form-control form-control-sm"'); ?>
+  <?php echo form_input('url', $this->input->post('url'), 'class="form-control"'); ?>
   <?php echo form_error('url'); ?>
 </p>
 <p>
@@ -19,7 +19,7 @@
   </label>
 </p>
 <p>
-  <?php echo form_submit('submit', 'Save changes', 'class="btn btn-sm btn-secondary"'); ?>
+  <?php echo form_submit('submit', 'Save changes', 'class="btn btn-secondary"'); ?>
   or <?php echo anchor('links', 'cancel'); ?>
 </p>
 <?php echo form_close(); ?>

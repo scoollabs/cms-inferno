@@ -9,7 +9,7 @@
   <?php echo form_error('teaser'); ?>
 </p>
 <p>Content<br>
-  <?php echo form_textarea('content', $this->input->post('content'), 'class="summernote"'); ?>
+  <?php echo form_textarea('content', $this->input->post('content'), 'class="form-control summernote"'); ?>
   <?php echo form_error('content'); ?>
 </p>
 <p>

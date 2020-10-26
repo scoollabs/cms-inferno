@@ -1,5 +1,5 @@
 <h3>Links</h3>
-<p><?php echo anchor('links/add', '<i class="fa fa-plus-circle" aria-hidden="true"></i> Add link', 'class="btn btn-sm btn-secondary"'); ?></p>
+<p><?php echo anchor('links/add', '<i class="fa fa-plus-circle" aria-hidden="true"></i> Add link', 'class="btn btn-secondary"'); ?></p>
 <table class="table">
   <tr>
     <th>Name</th>

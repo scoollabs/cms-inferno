@@ -1,19 +1,19 @@
 <h3>Edit post</h3>
 <?php echo form_open('posts/edit/' . $post->id); ?>
 <p>Title<br>
-  <?php echo form_input('title', $post->title, 'class="form-control form-control-sm"'); ?>
+  <?php echo form_input('title', $post->title, 'class="form-control"'); ?>
   <?php echo form_error('title'); ?>
 </p>
 <p>Teaser<br>
-  <?php echo form_input('teaser', $post->teaser, 'class="form-control form-control-sm"'); ?>
+  <?php echo form_input('teaser', $post->teaser, 'class="form-control"'); ?>
   <?php echo form_error('teaser'); ?>
 </p>
 <p>Content<br>
-  <?php echo form_textarea('content', $post->content, 'class="summernote"'); ?>
+  <?php echo form_textarea('content', $post->content, 'class="form-control summernote"'); ?>
   <?php echo form_error('content'); ?>
 </p>
 <p>
-  <?php echo form_submit('submit', 'Save changes', 'class="btn btn-sm btn-secondary"'); ?>
+  <?php echo form_submit('submit', 'Save changes', 'class="btn btn-secondary"'); ?>
   or <?php echo anchor('posts', 'cancel'); ?>
 </p>
 <?php echo form_close(); ?>

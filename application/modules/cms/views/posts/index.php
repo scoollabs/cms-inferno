@@ -1,5 +1,5 @@
 <h3>Posts</h3>
-<p><?php echo anchor('posts/add', '<i class="fa fa-plus-circle" aria-hidden="true"></i> Add post', 'class="btn btn-sm btn-secondary"'); ?></p>
+<p><?php echo anchor('posts/add', '<i class="fa fa-plus-circle" aria-hidden="true"></i> Add post', 'class="btn btn-secondary"'); ?></p>
 <table class="table">
   <tr>
     <th>Date</th>
