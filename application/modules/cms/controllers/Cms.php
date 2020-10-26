@@ -15,30 +15,25 @@ class Cms extends MY_Controller {
 
   }
 
-  function settings() {
-
-  }
-
   function home() {
-    // load_view('home', null, 'layout', get_cms_theme());
     load_view('home');
   }
 
   function blog() {
     $data['posts'] = $this->post_model->find_all();
-    load_view('blog', $data, 'layout', get_cms_theme());
+    load_view('blog', $data);
   }
 
   function page($page_id) {
     $data['page'] = $this->page_model->read($page_id);
-    load_view('page', $data, 'layout', get_cms_theme());
+    load_view('page', $data);
   }
 
   function post($post_id) {
     $post = $this->post_model->read($post_id);
     redirect_if(!$post, '.');
     $data['post'] = $post;
-    load_view('post', $data, 'layout', get_cms_theme());
+    load_view('post', $data);
   }
 
   function leave_comment($post_id) {
@@ -48,11 +43,13 @@ class Cms extends MY_Controller {
   }
 
   function show_404() {
-    load_view('404', null, 'layout', get_cms_theme());
+    load_view('404');
   }
 
   // Admin functions
   function login() {
+    redirect_if(session('user_id'), 'posts');
+
     $data['message'] = '';
     if ($this->input->post()) {
       list($username, $password) = login_form();
@@ -73,12 +70,19 @@ class Cms extends MY_Controller {
     redirect('login');
   }
 
+  function settings() {
+    redirect_if(!session('user_id'), 'login');
+    load_admin_view('settings');
+  }
+
   function posts() {
+    redirect_if(!session('user_id'), 'login');
     $data['posts'] = $this->post_model->find_all();
     load_admin_view('posts/index', $data);
   }
 
   function add_post() {
+    redirect_if(!session('user_id'), 'login');
     if ($this->input->post()) {
       $post = post_form($this->session->userdata('user_id'));
       print_pre($post);
@@ -92,6 +96,7 @@ class Cms extends MY_Controller {
   }
 
   function edit_post($post_id) {
+    redirect_if(!session('user_id'), 'login');
     if ($this->input->post()) {
       $post = post_form($this->session->userdata('user_id'));
       post_form_validate();
@@ -105,16 +110,19 @@ class Cms extends MY_Controller {
   }
 
   function delete_post($post_id) {
+    redirect_if(!session('user_id'), 'login');
     $this->post_model->delete($post_id);
     redirect('posts');
   }
 
   function pages() {
+    redirect_if(!session('user_id'), 'login');
     $data['pages'] = $this->page_model->find_all();
     load_admin_view('pages/index', $data);
   }
 
   function add_page() {
+    redirect_if(!session('user_id'), 'login');
     if ($this->input->post()) {
       $page = page_form();
       page_form_validate();
@@ -127,6 +135,7 @@ class Cms extends MY_Controller {
   }
 
   function edit_page($page_id) {
+    redirect_if(!session('user_id'), 'login');
     if ($this->input->post()) {
       $page = page_form();
       page_form_validate();
@@ -140,16 +149,19 @@ class Cms extends MY_Controller {
   }
 
   function delete_page($page_id) {
+    redirect_if(!session('user_id'), 'login');
     $this->page_model->delete($page_id);
     redirect('pages');
   }
 
   function links() {
+    redirect_if(!session('user_id'), 'login');
     $data['links'] = $this->link_model->find_all();
     load_admin_view('links/index', $data);
   }
 
   function add_link() {
+    redirect_if(!session('user_id'), 'login');
     if ($this->input->post()) {
       $link = link_form();
       link_form_validate();
@@ -163,6 +175,7 @@ class Cms extends MY_Controller {
   }
 
   function edit_link($link_id) {
+    redirect_if(!session('user_id'), 'login');
     if ($this->input->post()) {
       $link = link_form();
       link_form_validate();
@@ -177,6 +190,7 @@ class Cms extends MY_Controller {
   }
 
   function delete_link($link_id) {
+    redirect_if(!session('user_id'), 'login');
     $this->link_model->delete($link_id);
     redirect('links');
   }

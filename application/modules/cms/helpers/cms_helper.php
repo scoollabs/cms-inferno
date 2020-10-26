@@ -20,6 +20,14 @@ function print_pre($text) {
   echo '</pre>';
 }
 
+function session($key, $value = '') {
+  $obj = &get_instance();
+  if ($value) {
+    $obj->session->set_userdata($key, $value);
+  }
+  return $obj->session->userdata($key);
+}
+
 function theme_path() {
   $obj = &get_instance();
   return trimmed_base_url() . '/application/views/' . $obj->layout->get_theme();
